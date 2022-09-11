@@ -8,7 +8,7 @@
 }
 
 body {
-    background-image: url(/img/fundo.jpg); /* imagem fundo */
+    background-image: url(/fundo.jpg); /* imagem fundo */
     background-position: center; /* centralizar */
     background-size: cover; /* se a iagem for muito grance, ela se adapta a tel */
 }
