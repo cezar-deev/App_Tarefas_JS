@@ -8,38 +8,46 @@ const editForm = document.querySelector("#edit-form");
 const editInput = document.querySelector("#edit-input");
 const canceleditBtn = document.querySelector("#cancel-edit-btn");
 
+let oldInputValue; // 
+
 
 //Funções
 // função para salvar o todo
 const saveTodo = (text) => {
     const todo = document.createElement("div"); // criando div externa
-        todo.classList.add("todo")
+    todo.classList.add("todo")
 
     const todoTitle = document.createElement("h3"); // criando o titulo h3
-        todoTitle.innerText = text;
-        todo.appendChild(todoTitle);
+    todoTitle.innerText = text;
+    todo.appendChild(todoTitle);
 
     const doneBtn = document.createElement("button") // criando o botão doneBtn
-        doneBtn.classList.add("finish-todo")
-        doneBtn.innerHTML = '<i class="fa-solid fa-chec">Ok</i>'
-        todo.appendChild(doneBtn);
+    doneBtn.classList.add("finish-todo")
+    doneBtn.innerHTML = '<i class="fa-solid fa-chec">Ok</i>'
+    todo.appendChild(doneBtn);
 
     const editBtn = document.createElement("button") // criando o botão editBtn
-        editBtn.classList.add("edit-todo")
-        editBtn.innerHTML = '<i class="fa-solid fa-pen">Ed</i>'
-        todo.appendChild(editBtn);
+    editBtn.classList.add("edit-todo")
+    editBtn.innerHTML = '<i class="fa-solid fa-pen">Ed</i>'
+    todo.appendChild(editBtn);
 
     const deleteBtn = document.createElement("button") // criando o botão deleteBtn
-        deleteBtn.classList.add("remove-todo")
-        deleteBtn.innerHTML = '<i class="fa-solid fa-xmark">Fi</i>'
-        todo.appendChild(deleteBtn);
+    deleteBtn.classList.add("remove-todo")
+    deleteBtn.innerHTML = '<i class="fa-solid fa-xmark">Fi</i>'
+    todo.appendChild(deleteBtn);
     
-        todoList.appendChild(todo); // Colocando o todo na lista geral (todolist)
+    todoList.appendChild(todo); // Colocando o todo na lista geral (todolist)
 
-        todoInput.value = ""; // Apagar o ultimo digitado
-        todoInput.focus(); // Colocar o focus na caixa de texto novamente
+    todoInput.value = ""; // Apagar o ultimo digitado
+    todoInput.focus(); // Colocar o focus na caixa de texto novamente
     };
 
+    //Função para editar o todo
+    const toggleForms = () => {
+        editForm.classList.toggle("hide"); // se tiver exibido escode, e tiver escondido exibe
+        todoForm.classList.toggle("hide");
+        todoList.classList.toggle("hide");
+        };
 
 
 //Eventos
@@ -55,28 +63,42 @@ todoForm.addEventListener("submit", (e) => {
 });
 
 
-
-//Evento dos cliques dos botões
+//Eventos dos cliques dos botões ( ok,Ed,FI )
 document.addEventListener("click", (e) => {
     const targetEl = e.target; 
     const parentEl = targetEl.closest("div"); // adiconar ao elemento pai "div" mais proximo
+    let todoTitle;
 
-    // botão finish-todo (OK)
+    // evento para capturar o titulo
+    if (parentEl && parentEl.querySelector("h3")) {
+        todoTitle = parentEl.querySelector("h3").innerText;
+    }
+
+    // Evento do botão finish-todo (OK)
     if (targetEl.classList.contains("finish-todo")) {
         parentEl.classList.toggle("done"); // marca (traceja) ne desmara a tarefa 
     }  
     
-    // Botão edit-todo (Ed)
-    if (targetEl.classList.contains("edit-todo")) {
-        console.log("editou")
-    }
-
-
-    // Botão remode-todo (Fi)
+    // BEvento do botão remode-todo (Fi)
     if (targetEl.classList.contains("remove-todo")) {
         parentEl.remove(); // Remove o elemento pai (parentEl)
     }
 
+    // Evento do botão edit-todo (Ed)
+    if (targetEl.classList.contains("edit-todo")) {
+        toggleForms();
+
+        editInput.value = todoTitle;
+        oldInputValue.value = todoTitle;
+
+    }
+ 
+
 });
 
+//Evento do botão cancelar ( Cancelar )
+canceleditBtn.addEventListener("click", (e) => {
+    e.preventDefault()
 
+ toggleForms();
+})
