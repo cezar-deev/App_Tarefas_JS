@@ -15,24 +15,27 @@ let oldInputValue; //
 // função para salvar o todo
 const saveTodo = (text) => {
     const todo = document.createElement("div"); // criando div externa
-    todo.classList.add("todo")
+    todo.classList.add("todo");
 
     const todoTitle = document.createElement("h3"); // criando o titulo h3 para guardar
     todoTitle.innerText = text;
     todo.appendChild(todoTitle);
 
     const doneBtn = document.createElement("button") // criando o botão doneBtn (Feito)
-    doneBtn.classList.add("finish-todo")
+    doneBtn.classList.add("finish-todo");
+    doneBtn.title = "Feito";
     doneBtn.innerHTML = '<i class="fa-solid fa-check"></i>'
     todo.appendChild(doneBtn);
 
     const editBtn = document.createElement("button") // criando o botão editBtn (Editar)
-    editBtn.classList.add("edit-todo")
+    editBtn.classList.add("edit-todo");
+    editBtn.title = "Editar";
     editBtn.innerHTML = '<i class="fa-solid fa-pen"></i>'
     todo.appendChild(editBtn);
 
     const deleteBtn = document.createElement("button") // criando o botão deleteBtn (Excluir)
     deleteBtn.classList.add("remove-todo")
+    deleteBtn.title = "Excluir";
     deleteBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>'
     todo.appendChild(deleteBtn);
     
