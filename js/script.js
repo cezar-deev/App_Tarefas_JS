@@ -17,23 +17,23 @@ const saveTodo = (text) => {
     const todo = document.createElement("div"); // criando div externa
     todo.classList.add("todo")
 
-    const todoTitle = document.createElement("h3"); // criando o titulo h3
+    const todoTitle = document.createElement("h3"); // criando o titulo h3 para guardar
     todoTitle.innerText = text;
     todo.appendChild(todoTitle);
 
-    const doneBtn = document.createElement("button") // criando o botão doneBtn
+    const doneBtn = document.createElement("button") // criando o botão doneBtn (Feito)
     doneBtn.classList.add("finish-todo")
-    doneBtn.innerHTML = '<i class="fa-solid fa-chec">Ok</i>'
+    doneBtn.innerHTML = '<i class="fa-solid fa-check"></i>'
     todo.appendChild(doneBtn);
 
-    const editBtn = document.createElement("button") // criando o botão editBtn
+    const editBtn = document.createElement("button") // criando o botão editBtn (Editar)
     editBtn.classList.add("edit-todo")
-    editBtn.innerHTML = '<i class="fa-solid fa-pen">Ed</i>'
+    editBtn.innerHTML = '<i class="fa-solid fa-pen"></i>'
     todo.appendChild(editBtn);
 
-    const deleteBtn = document.createElement("button") // criando o botão deleteBtn
+    const deleteBtn = document.createElement("button") // criando o botão deleteBtn (Excluir)
     deleteBtn.classList.add("remove-todo")
-    deleteBtn.innerHTML = '<i class="fa-solid fa-xmark">Fi</i>'
+    deleteBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>'
     todo.appendChild(deleteBtn);
     
     todoList.appendChild(todo); // Colocando o todo na lista geral (todolist)
@@ -58,7 +58,7 @@ todoForm.addEventListener("submit", (e) => {
     const inputValue = todoInput.value;
 
     if (inputValue) {
-        saveTodo(inputValue) // chama a função que salva o todo
+        saveTodo(inputValue) // chama a função que salva o todo(tarefa)
     }
 });
 
@@ -76,7 +76,7 @@ document.addEventListener("click", (e) => {
 
     // Evento do botão finish-todo (OK)
     if (targetEl.classList.contains("finish-todo")) {
-        parentEl.classList.toggle("done"); // marca (traceja) ne desmara a tarefa 
+        parentEl.classList.toggle("done"); // marca e desmarcar tarefa
     }  
     
     // BEvento do botão remode-todo (Fi)
