@@ -52,7 +52,21 @@ const saveTodo = (text) => {
         todoList.classList.toggle("hide");
         };
 
+    //Função tambem referente a edição do todo (Tarefa)
+    const updateTodo = (text) => {
+        const todos = document.querySelectorAll(".todo")
 
+        todos.forEach((todo) => {
+           let todoTitle = todo.querySelector("h3") 
+
+           if(todoTitle.innerText === oldInputValue) { // verificando o texto
+            todoTitle.innerText = text                 // alterando o texto
+           }
+        });
+    };
+
+
+    
 //Eventos
 // Evento para adiconar itens na lista de todos
 todoForm.addEventListener("submit", (e) => {
@@ -92,7 +106,7 @@ document.addEventListener("click", (e) => {
         toggleForms();
 
         editInput.value = todoTitle;
-        oldInputValue.value = todoTitle;
+        oldInputValue = todoTitle;
 
     }
  
@@ -104,4 +118,19 @@ canceleditBtn.addEventListener("click", (e) => {
     e.preventDefault()
 
  toggleForms();
-})
+});
+
+//
+editForm.addEventListener("submit", (e) => {
+
+    e.preventDefault()
+
+    const editInputValue = editInput.value
+
+    if(editInputValue) {
+        updateTodo(editInputValue)
+    }
+
+    toggleForms()
+}
+);
